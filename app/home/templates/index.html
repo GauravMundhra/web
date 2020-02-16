@@ -12,6 +12,44 @@
 
   {% include "site_template/top-stats.html" %}
 
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+#buttonload {
+  background-color: #000f33; /* Green background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 8px 24px; /* Some padding */
+  font-size: 20px; /* Set a font-size */
+  width: 400px;
+  height: 250px;
+  position: absolute;
+  left: 0%;
+  top: 100%;
+  z-index: 1;
+  margin: -75px 0 0 -75px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+#myDiv {
+  display: none;
+  text-align: center;
+}
+
+/* Add a right margin to each icon */
+.fa {
+  margin-left: -10px;
+  margin-right: 10px;
+}
+</style>
+</head>
+<body>
+
+
   <div id="chart-container">
     <script src="{{ url_for('static', filename='app/base/static/assets/js/app.js') }}"></script>
   </div>  
@@ -20,7 +58,7 @@
   
   <div class="container-fluid mt--7">
     <div class="row">
-      <div class="col-xl-8 mb-5 mb-xl-0">
+      <div class="col-xl-8 mb-2 mb-xl-0">
         <div class="card bg-gradient-default shadow">
           <div class="card-header bg-transparent">
             <div class="row align-items-center">
@@ -31,29 +69,83 @@
               <div class="col">
                 <ul class="nav nav-pills justify-content-end">
                   <li class="nav-item" >
-                    <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
-                      <span class="d-none d-md-block">run</span>
-                      <span class="d-md-none">W</span>
-                      
-                    </a>
-                  </li>
-                  <li class="nav-item" >
+                   <input type="submit" onclick="myFunction()" value="Run" style="margin:0;"  />
+
+  <div style="display:none;" id="buttonload">
+    <br>
+  <i class="fa fa-spinner fa-spin"></i> Processing Invoices.....
+  </div>
+  <div style="display:none;" id="buttonload1">
+    <br>Processing Invoices..... Done
+  <i class="fa fa-spinner fa-spin"></i>Converting Invoices.....
+  </div>
+
+<form action="http://localhost:5000/runn" id="myform" style="display:none;" >
+  
+</form>
+
+<form action="http://localhost:5000/runn1" onsubmit="my()" id="myform1" style="display:none;" >
+  
+</form>
+
+
+
+ <script>
+var myVar;
+
+
+
+async function myFunction() {
+  document.getElementById("buttonload").style.display = "block";
+  document.getElementById("myform").submit(); 
+}
+async function my(){
+  
+  document.getElementById("buttonload1").style.display = "block";
+
+}
+
+
+</script>
+ 
+
+
+                 <!-- <li class="nav-item" >
                     <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
                       <span class="d-none d-md-block">Update</span>
                       <span class="d-md-none">W</span>
                     </a>
+                  </li> -->
+                </ul> 
+              </div>
+            </div>
+            <br><br>
+             <div class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-light ls-1 mb-1">Click</h6>
+                <h2 class="text-white mb-0">To Archive Invoices</h2>
+              </div>
+              <div class="col">
+                <ul class="nav nav-pills justify-content-end">
+                  <li class="nav-item" >
+                   <form action="http://localhost:5000/runn">
+                      <input type="submit" class="d-none d-md-block" value="Archive">
+                    </form>
                   </li>
-                </ul>
+
+                 <!-- <li class="nav-item" >
+                    <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
+                      <span class="d-none d-md-block">Update</span>
+                      <span class="d-md-none">W</span>
+                    </a>
+                  </li> -->
+                </ul> 
               </div>
             </div>
           </div>
           
             <!-- Chart -->
-            <div class="chart">
-              <!-- Chart wrapper -->
-              
-            
-          </div>
+           
         </div>
       </div>
       <div class="col-xl-4">
@@ -67,15 +159,15 @@
             </div>
           </div>
           
-            <!-- Chart -->
-            <div class="chart">
-              
-            </div>
+          
           </div>
         </div>
       </div>
   </div>
 </div>
+
+
+
     <!--
     <div class="row mt-5">
       <div class="col-xl-8 mb-5 mb-xl-0">
@@ -300,9 +392,18 @@
     {% include "site_template/footer.html" %}
 
   </div>
+ 
+
+
+</body>
+</html>
+
+
 
 {% endblock content %}
 
 {% block javascripts %}
   {{ super()}}
 {% endblock javascripts %}
+
+

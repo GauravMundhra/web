@@ -5,10 +5,15 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from app.home import blueprint
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, jsonify , Flask
 from flask_login import login_required, current_user
 from app import login_manager
 from jinja2 import TemplateNotFound
+import test
+import easygui
+from random import sample
+
+
 
 @blueprint.route('/index')
 @login_required
@@ -34,3 +39,18 @@ def route_template(template):
     
     except:
         return render_template('error-500.html'), 500
+
+
+@blueprint.route('/runn')
+def run():
+    test.hello()
+    return render_template('index.html')
+
+
+
+
+@blueprint.route('/data')
+def dataa():
+    return jsonify({'results':test.excel()})
+
+

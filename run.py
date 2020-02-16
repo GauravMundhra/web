@@ -11,7 +11,6 @@ from flask_migrate import Migrate
 from os import environ
 from sys import exit
 from flask import Flask, render_template, request
-
 from config import config_dict
 from app import create_app, db
 
@@ -25,12 +24,9 @@ except KeyError:
 app = create_app(config_mode) 
 Migrate(app, db)
 
+
 if __name__ == "__main__":
     app.run(debug=True)
     
 
-@app.route("/",methods=['POST'] )
-def external(request):
-    out= run([sys.executable,'//home//gaurav//Desktop//Genpact//MEA//test.py'],shell=False,stdout=PIPE)
-    print(out)
-    return render(request,'home.html',{'data1':out.stdout})
+

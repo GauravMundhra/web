@@ -1,5 +1,6 @@
 
     <script src="https://unpkg.com/gauge-chart@0.5.1/dist/bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <!-- Header -->
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
@@ -22,7 +23,12 @@
                     </div>
                     <div id="gaugeArea2"></div>
                     <script>
-                        // Element inside which you want to see the chart.
+
+                      var getData = $.get('/data');
+
+                      getData.done(function(results)
+                      {
+                          // Element inside which you want to see the chart.
                 
                         //let element1 = document.querySelector('#gaugeArea1')
                       let element = document.querySelector('#gaugeArea2')
@@ -39,9 +45,9 @@
                         let options = {
                           hasNeedle: true,
                           needleColor: 'black',
-                          arcColors: ['red','yellow','lightgreen','green'],
-                          arcDelimiters: [70,85,90],
-                          rangeLabel: ['0', '100'],
+                          arcColors: ['red','green'],
+                          arcDelimiters: [results.results[1]],
+                          rangeLabel: ['0',''+results.results[0]],
                           needleStartValue: 0,
                         }
                        // let options3 = {
@@ -103,7 +109,7 @@
                       
                          GaugeChart
                           .gaugeChart(element, 300, options)
-                          .updateNeedle(90)
+                          .updateNeedle(results.results[2])
                       
                       //  GaugeChart
                         // .gaugeChart(element3, 400, options3)
@@ -113,6 +119,8 @@
                         //  .gaugeChart(element4, 400, options5)
                       //    .updateNeedle(30)
                 
+                        
+                      });
                         
                       </script>
                     
@@ -139,7 +147,7 @@
                         </div>
                       </div>
                     </div>
-                    <div id="gaugeArea3"></div>
+                    <!--<div id="gaugeArea3"></div>-->
 
 
                     <p class="mt-3 mb-0 text-muted text-sm">
@@ -193,7 +201,7 @@
                       <progress value="80" max="100"></progress>
                       <span>80</span>
                     </p>
-                  <div id="gaugeArea3"></div>
+                 <!-- <div id="gaugeArea3"></div> -->
                   <p class="mt-3 mb-0 text-muted text-sm">
                     <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
                     <span class="text-nowrap">Since yesterday</span>
@@ -212,7 +220,7 @@
 
         //let element1 = document.querySelector('#gaugeArea1')
       
-      let element3 = document.querySelector('#gaugeArea3')
+      //let element3 = document.querySelector('#gaugeArea3')
         //let element4 = document.querySelector('#gaugeArea4')
       
       // let options1 = {
@@ -230,14 +238,14 @@
        //   rangeLabel: ['0', '100'],
        //   needleStartValue: 0,
        // }
-        let options3 = {
-          hasNeedle: true,
-          needleColor: 'black',
-          arcColors: ['red','yellow','lightgreen','green'],
-          arcDelimiters: [70,85,90],
-          rangeLabel: ['0', '100'],
-          needleStartValue: 0,
-        }
+     //   let options3 = {
+      //    hasNeedle: true,
+     //     needleColor: 'black',
+       //   arcColors: ['red','yellow','lightgreen','green'],
+      //    arcDelimiters: [70,85,90],
+      //    rangeLabel: ['0', '100'],
+      //    needleStartValue: 0,
+    //    }
       //  let options3 = {
       //    hasNeedle: true,
         //  outerNeedle: true,
@@ -287,9 +295,9 @@
          // .gaugeChart(element, 300, options1)
          // .updateNeedle(70)
       
-         GaugeChart
-          .gaugeChart(element3, 300, options)
-          .updateNeedle(70)
+     //    GaugeChart
+     //     .gaugeChart(element3, 300, options)
+      //    .updateNeedle(70)
       
       //  GaugeChart
         // .gaugeChart(element3, 400, options3)
